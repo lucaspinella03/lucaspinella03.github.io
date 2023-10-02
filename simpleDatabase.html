@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {text-align: center; background-color: darkslateblue;}
+        #enterDetails {float: left; width: 50%;  background-color: darkslategray; color: floralwhite;}
+        #findDetails {float: left; width: 50%; background-color: floralwhite; color: darkslategray;}
+        input {width: 120px;}
+        #prof1 {float:left;}
+        #prof2 {float:right;}
+
+    </style>
+</head>
+<body>
+    <img src="luca-photography-logo.png" width="1000" height="500"> <br>
+
+    <div id="prof1">
+        <h1>Profile #1</h1>
+        <h4 id="name">example name</h4> <br>
+        <h4 id="food">example food</h4> <br>
+        <h4 id="age"> example age</h4> <br>
+        <h4 id="fact"> example fact</h4> <br>
+        <img src="" id = "image" width="100">
+
+
+    </div>
+
+    <div id="prof2">
+        <h1>Profile #2</h1>
+        <h4 id="name2">example name</h4> <br>
+        <h4 id="food2">example food</h4> <br>
+        <h4 id="age2"> example age</h4> <br>
+        <h4 id="fact2"> example fact</h4> <br>
+        <img src="" id = "image2" width="100">
+
+    </div>
+    
+    
+
+    
+
+    <iframe src="https://thunkable.site/w/IKOXuriamj3t6iDOKUYTY" title="CSC305 Login App" height = 1000 width = 500></iframe>
+</body>
+
+<script type="module">
+
+    //THIS IS WHERE YOU PASTE THE CODE TO CONNECT TO YOUR OWN DATABASE
+    //Copy and paste the CDN bit of code from your app that you created on Firebase.
+    //The script tag above is already there, so careful not to have duplicate script tags.
+    //After you've copied and pasted, just delete the unnecessary script tags. 
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCv5euS92R3k-L9yrlv-kurqSorGawfxms",
+        authDomain: "profile-app-68c51.firebaseapp.com",
+        databaseURL: "https://profile-app-68c51-default-rtdb.firebaseio.com",
+        projectId: "profile-app-68c51",
+        storageBucket: "profile-app-68c51.appspot.com",
+        messagingSenderId: "322313483547",
+        appId: "1:322313483547:web:f685d02cf8bea87b034fbe",
+        measurementId: "G-V6ECSKSV9G"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    import {getDatabase, ref, get, set, child, update, remove}
+    from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"
+    //Copy and Paste the URL from near the top of the CDN you pasted in from firebase
+    // (the one where you imported "initializeApp" from),
+    //but change "firebase-app" to "firebase-database"
+    
+
+    const db = getDatabase();
+
+    var name = document.querySelector("#name");
+    var name2 = document.querySelector("#name2");
+    var food = document.querySelector("#food");
+    var food2 = document.querySelector("#food2");
+    var age = document.querySelector("#age");
+    var age2 = document.querySelector("#age2");
+    var fact = document.querySelector("#fact");
+    var fact2 = document.querySelector("#fact2");
+    var image = document.querySelector("#image"); 
+    var image2 = document.querySelector("#image2");     
+    
+
+    const dbref = ref(db);
+
+        get(child(dbref, "7TTLNzA8zvdziyygSUeTQpKHw1Y2"))
+        .then((snapshot)=>{
+            if(snapshot.exists()){
+                name.innerHTML = "Name: " + snapshot.val().name;
+                food.innerHTML = "Food: " + snapshot.val().food;
+                age.innerHTML = "Age: " + snapshot.val().age;
+                fact.innerHTML = "Fact: " + snapshot.val().fact;
+                image.src = snapshot.val().image;
+
+
+            } else {
+                alert("No data found");
+            }
+        })
+        .catch((error)=>{
+            alert(error)
+        })
+
+        get(child(dbref, "m3ezrUnMCJhQYL7DPOBxozl7ln03"))
+        .then((snapshot)=>{
+            if(snapshot.exists()){
+                name2.innerHTML = "Name: " + snapshot.val().name;
+                food2.innerHTML = "Food: " + snapshot.val().food;
+                age2.innerHTML = "Age: " + snapshot.val().age;
+                fact2.innerHTML = "Fact: " + snapshot.val().fact;
+                image2.src = snapshot.val().image;
+
+
+            } else {
+                alert("No data found");
+            }
+        })
+        .catch((error)=>{
+            alert(error)
+        })
+
+
+</script>
+</html>
